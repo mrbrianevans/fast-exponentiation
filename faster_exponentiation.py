@@ -26,3 +26,34 @@ def binary_exponentiation(x, n):
     if n:
         answer *= x
     return answer
+
+
+def speed_test(functions):
+    print("Speed test:")
+    for func in functions:
+        start_time = time.perf_counter()
+        for i in range(1, 100):
+            for j in range(1, 1000):
+                func(i, j)
+        finish_time = time.perf_counter()
+        time_taken = round(finish_time - start_time, 3)
+        print(func.__name__, "finished in", time_taken, "seconds")
+    print("Speed test complete")
+
+
+def accuracy_test(functions):
+    passed = True
+    for i in range(1, 100):
+        for j in range(1, 100):
+            answer = functions[0](i, j)
+            for func in functions:
+                if not func(i, j) == answer:
+                    print("Accuracy test failed on", i, "to the power of", j)
+                    passed = False
+    print("Accuracy Test:", "PASSED" if passed else "FAILED")
+
+
+if __name__ == "__main__":
+    two_functions = [traditional_exponentiation, binary_exponentiation]
+    accuracy_test(two_functions)
+    speed_test(two_functions)
