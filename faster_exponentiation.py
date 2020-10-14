@@ -1,4 +1,5 @@
 import math
+import time
 
 
 def traditional_exponentiation(x, n):
